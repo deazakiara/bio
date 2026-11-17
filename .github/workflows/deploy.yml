@@ -49,7 +49,7 @@ jobs:
 
       - name: Upload dengan rsync
         run: |
-          rsync -rlvz --delete --checksum \
+          rsync -rlvz --delete --checksum --chmod=D775,F664 \
             --exclude '.git*' --exclude '.github/' --exclude '.DS_Store' \
             --exclude '.well-known/' --exclude '.user.ini' \
             -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
