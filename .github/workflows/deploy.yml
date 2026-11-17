@@ -15,7 +15,7 @@ jobs:
     name: Cek aset
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Pastikan semua file yang dirujuk ada
         run: python3 .github/scripts/cek-aset.py
 
@@ -31,7 +31,7 @@ jobs:
       SSH_USER: ${{ secrets.SSH_USER }}
       DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Cek secrets
         run: |
