@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f1f10">
-<meta name="description" content="Belajar mikroskop, mitosis, meiosis, siklus sel, epitel, dan histologi untuk uprak Biologi dengan model 3D, skema 2D, foto mikroskop asli, permainan hafalan, praktik preparat, dan 50 soal latihan berpembahasan.">
-<title>Uprak Biologi 3D</title>
+<meta name="description" content="Belajar mikroskop, mitosis, meiosis, siklus sel, epitel, dan histologi dengan model 3D, skema 2D, foto mikroskop asli, permainan hafalan, praktik preparat, dan 50 soal latihan berpembahasan.">
+<title>Atlas Sel 3D</title>
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link href="fonts/fonts.css" rel="stylesheet">
 <style>
@@ -722,7 +722,7 @@ main{display:block}
 <body>
 <a class="skip" href="#main">Lewati ke isi</a>
 <header class="bar">
-  <a class="wordmark" href="#mulai" data-view="mulai">Uprak Biologi</a>
+  <a class="wordmark" href="#mulai" data-view="mulai">Atlas Sel</a>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   <nav id="nav" class="nav" aria-label="Bab">
     <a href="#mikroskop" data-view="mikroskop">Mikroskop</a>
@@ -1312,8 +1312,8 @@ const Tweens = {
 const VIEWS = ['mulai', 'mikroskop', 'preparat', 'mitosis', 'meiosis', 'siklus', 'epitel', 'histologi', 'permainan', 'soal', 'ringkasan'];
 const ALIAS = { '': 'mulai', beranda: 'mulai', kuis: 'soal', hafalan: 'ringkasan', main: 'mulai', histo: 'histologi', jaringan: 'histologi', epithelium: 'epitel', game: 'permainan', games: 'permainan', minigame: 'permainan', hafal: 'permainan' };
 const STAGE_OF = { mikroskop: 'mikro', mitosis: 'mitosis', meiosis: 'meiosis', siklus: 'siklus', epitel: 'epitel', histologi: 'histo' };
-const TITLES = { mulai: 'Uprak Biologi 3D', mikroskop: 'Mikroskop · Uprak Biologi 3D', preparat: 'Praktik preparat · Uprak Biologi 3D', mitosis: 'Mitosis · Uprak Biologi 3D',
-  meiosis: 'Meiosis · Uprak Biologi 3D', siklus: 'Siklus sel · Uprak Biologi 3D', epitel: 'Epitel · Uprak Biologi 3D', histologi: 'Histologi · Uprak Biologi 3D', permainan: 'Main & hafalkan · Uprak Biologi 3D', soal: 'Latihan soal · Uprak Biologi 3D', ringkasan: 'Ringkasan · Uprak Biologi 3D' };
+const TITLES = { mulai: 'Atlas Sel 3D', mikroskop: 'Mikroskop · Atlas Sel 3D', preparat: 'Praktik preparat · Atlas Sel 3D', mitosis: 'Mitosis · Atlas Sel 3D',
+  meiosis: 'Meiosis · Atlas Sel 3D', siklus: 'Siklus sel · Atlas Sel 3D', epitel: 'Epitel · Atlas Sel 3D', histologi: 'Histologi · Atlas Sel 3D', permainan: 'Main & hafalkan · Atlas Sel 3D', soal: 'Latihan soal · Atlas Sel 3D', ringkasan: 'Ringkasan · Atlas Sel 3D' };
 const Router = {
   handlers: {}, current: null,
   on(view, fn){ (this.handlers[view] = this.handlers[view] || []).push(fn); },

@@ -1,4 +1,4 @@
-Uprak Biologi 3D: situs statis (HTML + gambar), tanpa database dan tanpa PHP.
+Atlas Sel 3D: situs statis (HTML + gambar), tanpa database dan tanpa PHP.
 
 Isi folder ini diunggah apa adanya ke folder root situs (di CloudPanel: htdocs/<domain-kamu>/),
 sehingga index.html berada langsung di dalam folder root itu.
