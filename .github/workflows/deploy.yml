@@ -1,0 +1,56 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  cek:
+    name: Cek aset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pastikan semua file yang dirujuk ada
+        run: python3 .github/scripts/cek-aset.py
+
+  deploy:
+    name: Deploy ke CloudPanel
+    needs: cek
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cek secrets
+        run: |
+          for v in SSH_HOST SSH_USER DEPLOY_PATH; do
+            if [ -z "${!v}" ]; then echo "::error::Secret $v belum diisi (Settings > Secrets and variables > Actions)"; exit 1; fi
+          done
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then echo "::error::Secret SSH_PRIVATE_KEY belum diisi"; exit 1; fi
+
+      - name: Siapkan SSH
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Upload dengan rsync
+        run: |
+          rsync -rlvz --delete --checksum \
+            --exclude '.git*' --exclude '.github/' --exclude '.DS_Store' \
+            --exclude '.well-known/' --exclude '.user.ini' \
+            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
+            ./ "$SSH_USER@$SSH_HOST:${DEPLOY_PATH%/}/"
